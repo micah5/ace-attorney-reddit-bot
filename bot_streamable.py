@@ -440,6 +440,7 @@ subreddits = [
     "aceattorney",
     "wallstreetbets",
     "stocks",
+    "programming",
 ]
 
 print("starting...")
