@@ -35,7 +35,7 @@ response = get_request(IP, PORT)
 
 # parsing the response output to get the state and code variables
 state_new, code = response.strip('/?').split('&')
-state_new = state.split('=')[1]
+state_new = state.split('=')[0]
 code = code.split('=')[1]
 
 # checking if state was changes and if so abort
