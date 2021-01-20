@@ -1,0 +1,10 @@
+Pillow
+matplotlib
+opencv-python
+pydub
+moviepy
+ffmpeg
+spacy
+textblob
+praw
+tinydb
