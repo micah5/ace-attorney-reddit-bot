@@ -3,3 +3,6 @@
 
 # Ignore __pycache__
 __pycache__/
+
+# ignore the db
+db.json
