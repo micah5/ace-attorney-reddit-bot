@@ -1,3 +1,5 @@
+cython
+spaw
 Pillow
 matplotlib
 opencv-python
