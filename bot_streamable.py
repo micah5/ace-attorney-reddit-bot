@@ -435,7 +435,6 @@ subreddits = [
     "aceattorney",
     "wallstreetbets",
     "stocks",
-    "oppai_suika_testing",
     "programming",
 ]
 
