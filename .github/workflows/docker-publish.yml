@@ -17,29 +17,7 @@ env:
   IMAGE_NAME: ace-attorney-reddit-bot
 
 jobs:
-  # Run tests.
-  # See also https://docs.docker.com/docker-hub/builds/automated-testing/
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - uses: actions/checkout@v2
-
-      - name: Run tests
-        run: |
-          docker build . --file Dockerfile \
-            --build-arg streamable_username=${{ secrets.streamable_username }} \
-            --build-arg streamable_password=${{ secrets.streamable_password }} \
-            --build-arg reddit_client_id=${{ secrets.reddit_client_id }} \
-            --build-arg reddit_client_secret=${{ secrets.reddit_client_secret }} \
-            --build-arg reddit_refresh_token=${{ secrets.reddit_refresh_token }}
-
-  # Push image to GitHub Packages.
-  # See also https://docs.docker.com/docker-hub/builds/
   push:
-    # Ensure test job passes before pushing image.
-    needs: test
-
     runs-on: ubuntu-latest
     if: github.event_name == 'push'
 
@@ -47,7 +25,13 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Build image
-        run: docker build . --file Dockerfile --tag $IMAGE_NAME
+        run: docker build . --file Dockerfile \
+          --build-arg streamable_username=${{ secrets.streamable_username }} \
+          --build-arg streamable_password=${{ secrets.streamable_password }} \
+          --build-arg reddit_client_id=${{ secrets.reddit_client_id }} \
+          --build-arg reddit_client_secret=${{ secrets.reddit_client_secret }} \
+          --build-arg reddit_refresh_token=${{ secrets.reddit_refresh_token }} \
+          --tag $IMAGE_NAME
 
       - name: Log into registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
