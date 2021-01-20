@@ -90,7 +90,6 @@ subreddits = [
     "JoeRogan",
     "thedavidpakmanshow",
     "ShowerThoughts",
-    "ShowerThoughts",
     "DoesAnybodyElse",
     "changemyview",
     "crazyideas",
@@ -106,7 +105,6 @@ subreddits = [
     "amitheasshole",
     "mechanicadvice",
     "toastme",
-    "needadvice",
     "IAmA",
     "ExplainlikeIAmA",
     "AMA",
@@ -205,7 +203,6 @@ subreddits = [
     "gamecollecting",
     "hitboxporn",
     "gamingcirclejerk",
-    "gamersriseup",
     "gamingdetails",
     "gaming4gamers",
     "retrogaming",
@@ -295,7 +292,6 @@ subreddits = [
     "osugame",
     "spidermanps4",
     "persona5",
-    "horizion",
     "mountandblade",
     "deadbydaylight",
     "farcry",
@@ -401,7 +397,6 @@ subreddits = [
     "modernwarfare",
     "codwarzone",
     "GlobalOffensive",
-    "globaloffensivetrade",
     "csgo",
     "halo",
     "haloonline",
@@ -440,6 +435,8 @@ subreddits = [
     "aceattorney",
     "wallstreetbets",
     "stocks",
+    "oppai_suika_testing",
+    "programming",
 ]
 
 print("starting...")
@@ -470,8 +467,7 @@ def init_stream(subreddit_name: str):
 User = Query()
 comment_streams = [init_stream(subreddit) for subreddit in subreddits]
 while True:
-    for idx, comment_stream in enumerate(comment_streams):
-        print(idx, subreddits[idx])
+    for comment_stream in comment_streams:
         for comment in comment_stream:
             if comment is None:
                 break
@@ -494,13 +490,14 @@ while True:
                         output_filename = f"{comment.id}.mp4"
                         print(f"generating video {output_filename}...")
                         characters = anim.get_characters(most_common)
-                        anim.comments_tob_scene(
+                        anim.comments_to_scene(
                             comments, characters, output_filename=output_filename
                         )
 
                         # upload video
                         print(f"uploading video...")
                         response = _spaw.videoUpload(output_filename)
+                        print(response)
                         comment.reply(
                             f"[Here's the video!](https://streamable.com/{response['shortcode']})"
                         )
