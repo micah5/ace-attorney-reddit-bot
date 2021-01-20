@@ -28,11 +28,11 @@ jobs:
         run: docker build --file Dockerfile --build-arg streamable_username=${{ secrets.streamable_username }} --build-arg streamable_password=${{ secrets.streamable_password }} --build-arg reddit_client_id=${{ secrets.reddit_client_id }} --build-arg reddit_client_secret=${{ secrets.reddit_client_secret }} --build-arg reddit_refresh_token=${{ secrets.reddit_refresh_token }} --tag $IMAGE_NAME .
 
       - name: Log into registry
-        run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login docker.pkg.github.com -u ${{ github.actor }} --password-stdin
+        run: docker login repo.treescale.com --username ${{ secrets.treescale_username }} --password ${{ secrets.treescale_password }}
 
       - name: Push image
         run: |
-          IMAGE_ID=docker.pkg.github.com/${{ github.repository }}/$IMAGE_NAME
+          IMAGE_ID=repo.treescale.com/${{ secrets.treescale_username }}/$IMAGE_NAME
 
           # Change all uppercase to lowercase
           IMAGE_ID=$(echo $IMAGE_ID | tr '[A-Z]' '[a-z]')
