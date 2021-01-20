@@ -12,14 +12,7 @@ streamable_password = os.environ.get("streamable_password")
 
 reddit_client_id = os.environ.get("reddit_client_id")
 reddit_client_secret = os.environ.get("reddit_client_secret")
-
-if os.path.exists('.refresh_token.txt'):
-    # get refresh_token from file
-    with open('.refresh_token.txt', 'r') as refresh_token_file:
-        reddit_refresh_token = refresh_token_file.read()
-else:
-    print('please authenticate before running')
-    sys.exit()
+reddit_refresh_token = os.environ.get("reddit_refresh_token")
 
 _spaw = spaw.SPAW()
 _spaw.auth(streamable_username, streamable_password)
