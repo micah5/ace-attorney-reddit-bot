@@ -6,3 +6,6 @@ __pycache__/
 
 # ignore the db
 db.json
+
+# Ignore the assets
+assets/
