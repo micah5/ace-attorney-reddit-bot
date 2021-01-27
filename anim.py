@@ -692,7 +692,7 @@ def comments_to_scene(comments: List, characters: Dict, **kwargs):
         joined_sentences, current_sentence = [], sentences[0]
         for sentence in sentences[1:]:
             if len(sentence) > 90:
-                text_chunks = [f"{chunk}..." for chunk in wrap(sentence, 85)]
+                text_chunks = [chunk for chunk in wrap(sentence, 85)]
                 joined_sentences = [*joined_sentences, *text_chunks]
             else:
                 if len(f"{current_sentence} {sentence}") <= 90:
@@ -714,7 +714,12 @@ def comments_to_scene(comments: List, characters: Dict, **kwargs):
                     "character": character,
                     "name": comment.author.name,
                     "text": chunk,
-                    "objection": (polarity < 0 or comment.score < 0) and idx == 0,
+                    "objection": (
+                        polarity < 0
+                        or comment.score < 0
+                        or re.search("objection", comment.body, re.IGNORECASE)
+                    )
+                    and idx == 0,
                     "emotion": main_emotion,
                 }
             )
