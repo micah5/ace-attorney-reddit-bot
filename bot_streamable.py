@@ -27,10 +27,11 @@ reddit = praw.Reddit(
 )
 
 
-with open('subreddits.txt', 'r') as sublst:
-    subreddits = [sub.strip(' \n') for sub in sublst if sub.strip(' \n') != '']
+with open("subreddits.txt", "r") as sublst:
+    subreddits = [sub.strip(" \n") for sub in sublst if sub.strip(" \n") != ""]
 
 print("starting...")
+
 
 def get_comment_chain(comment):
     if not isinstance(comment, praw.models.Comment):
@@ -89,7 +90,9 @@ while True:
                         response = _spaw.videoUpload(output_filename)
                         print(response)
                         comment.reply(
-                            f"[Here's the video!](https://streamable.com/{response['shortcode']})"
+                            f"""[Here's the video!](https://streamable.com/{response['shortcode']})
+
+                            (btw, I now work on all subreddits if you mention my username directly)"""
                         )
 
                         print(f"done {comment.id}")
