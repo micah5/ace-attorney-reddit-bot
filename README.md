@@ -14,4 +14,4 @@ Download them [here](https://drive.google.com/drive/folders/16zqMXmAoUWlWNKhs6LR
 
 ### Tutorial
 
-If you'd like to use anim.py outside of the bot please see [this notebook](/How to use anim.py.ipynb)
+If you'd like to use anim.py outside of the bot please see [this notebook](How_to_use_anim.py.ipynb)
