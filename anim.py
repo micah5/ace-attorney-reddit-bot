@@ -455,7 +455,6 @@ def do_video(config: List[Dict]):
                 if bench is not None:
                     bench.shake_effect = False
                 character.shake_effect = False
-                bench.shake_effect = False
                 scene_objs = list(
                     filter(lambda x: x is not None, [bg, character, bench])
                 )
@@ -582,7 +581,7 @@ character_emotions = {
     Character.EDGEWORTH: {
         "happy": ["confident", "pointing", "smirk"],
         "neutral": ["document", "normal", "thinking"],
-        "sad": ["emo", "handondesk"],
+        "sad": ["handondesk"],
     },
     Character.PHOENIX: {
         "happy": ["confident", "pointing", "handsondesk"],
