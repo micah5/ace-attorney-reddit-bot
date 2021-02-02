@@ -687,7 +687,11 @@ def comments_to_scene(comments: List, characters: Dict, **kwargs):
     scene = []
     inv_characters = {v: k for k, v in characters.items()}
     for comment in comments:
-        polarity = TextBlob(comment.body).sentiment.polarity
+        blob = TextBlob(comment.body)
+        if (blob.detect_language() != 'en'):
+            polarity = blob.translate(to='en').sentiment.polarity
+        else:
+            polarity = blob.sentiment.polarity
         tokens = nlp(comment.body)
         sentences = [sent.string.strip() for sent in tokens.sents]
         joined_sentences, current_sentence = [], sentences[0]
