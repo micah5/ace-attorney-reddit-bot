@@ -690,18 +690,21 @@ def comments_to_scene(comments: List, characters: Dict, **kwargs):
         polarity = TextBlob(comment.body).sentiment.polarity
         tokens = nlp(comment.body)
         sentences = [sent.string.strip() for sent in tokens.sents]
-        joined_sentences, current_sentence = [], sentences[0]
-        for sentence in sentences[1:]:
+        joined_sentences = []
+        i = 0
+        while i < len(sentences):
+            sentence = sentences[i]
             if len(sentence) > 90:
                 text_chunks = [chunk for chunk in wrap(sentence, 85)]
                 joined_sentences = [*joined_sentences, *text_chunks]
+                i += 1
             else:
-                if len(f"{current_sentence} {sentence}") <= 90:
-                    current_sentence += " " + sentence
+                if i + 1 < len(sentences) and len(f"{sentence} {sentences[i+1]}") <= 90: # Maybe we can join two different sentences
+                    joined_sentences.append(sentence + " " + sentences[i+1])
+                    i += 2
                 else:
-                    joined_sentences.append(current_sentence)
-                    current_sentence = sentence
-        joined_sentences.append(current_sentence)
+                    joined_sentences.append(sentence)
+                    i += 1
         character_block = []
         character = inv_characters[comment.author.name]
         main_emotion = random.choice(character_emotions[character]["neutral"])
