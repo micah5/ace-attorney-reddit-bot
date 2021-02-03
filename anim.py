@@ -688,7 +688,7 @@ def comments_to_scene(comments: List, characters: Dict, **kwargs):
     inv_characters = {v: k for k, v in characters.items()}
     for comment in comments:
         blob = TextBlob(comment.body)
-        if (blob.detect_language() != 'en'):
+        if (len(comment.body) >= 3 and blob.detect_language() != 'en'):
             polarity = blob.translate(to='en').sentiment.polarity
         else:
             polarity = blob.sentiment.polarity
