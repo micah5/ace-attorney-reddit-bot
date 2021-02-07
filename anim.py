@@ -520,7 +520,7 @@ def do_audio(sound_effects: List[Dict]):
         if obj["_type"] == "silence":
             audio_se += AudioSegment.silent(duration=int(obj["length"] * spf))
         elif obj["_type"] == "bip":
-            audio_se += blink + long_bip[: int(obj["length"] * spf - len(blink))]
+            audio_se += blink + long_bip[: max(int(obj["length"] * spf - len(blink)), 0)]
         elif obj["_type"] == "objection":
             if obj["character"] == "phoenix":
                 audio_se += pheonix_objection[: int(obj["length"] * spf)]
