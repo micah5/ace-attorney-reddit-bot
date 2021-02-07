@@ -14,7 +14,7 @@ from collections import Counter
 import random
 from textwrap import wrap
 import spacy
-from textblob import TextBlob
+from textblob import TextBlob, exceptions
 import re
 
 nlp = spacy.load("en_core_web_sm")
@@ -699,7 +699,15 @@ def comments_to_scene(comments: List, characters: Dict, **kwargs):
     scene = []
     inv_characters = {v: k for k, v in characters.items()}
     for comment in comments:
-        polarity = TextBlob(comment.body).sentiment.polarity
+        blob = TextBlob(comment.body)
+        if (len(comment.body) >= 3 and blob.detect_language() != 'en'):
+            try:
+                polarity = blob.translate(to='en').sentiment.polarity
+            except exceptions.NotTranslated as e:
+                print(e)
+                polarity = blob.sentiment.polarity
+        else:
+            polarity = blob.sentiment.polarity
         tokens = nlp(comment.body)
         sentences = [sent.string.strip() for sent in tokens.sents]
         joined_sentences, current_sentence = [], sentences[0]
