@@ -320,7 +320,8 @@ def do_video(config: List[Dict]):
                         default_path
                         ):
                         default_path = (
-                        f"{_dir}/{current_character_name.lower()}-normal(a).gif"
+                            f"{_dir}/{current_character_name.lower()}-normal(a).gif"
+                        )
                 assert os.path.isfile(
                     default_path
                 ), f"{default_path} does not exist"
@@ -344,7 +345,8 @@ def do_video(config: List[Dict]):
                         default_path
                         ):
                         default_path = (
-                        f"{_dir}/{current_character_name.lower()}-normal(a).gif"
+                            f"{_dir}/{current_character_name.lower()}-normal(a).gif"
+                        )
                 assert os.path.isfile(
                     default_path
                 ), f"{default_path} does not exist"
