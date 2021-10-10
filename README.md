@@ -15,3 +15,9 @@ Download them [here](https://drive.google.com/drive/folders/16zqMXmAoUWlWNKhs6LR
 ### Tutorial
 
 If you'd like to use anim.py outside of the bot please see [this notebook](How_to_use_anim.py.ipynb)
+
+### Windows requirements
+
+Download [openh264-1.8.0-win64.dll](https://github.com/cisco/openh264/releases/tag/v1.8.0) and paste the dll to the root of the folder.
+
+Download [FFmpeg](https://ffmpeg.org/download.html) and add its ``bin`` folder to your Path. 
