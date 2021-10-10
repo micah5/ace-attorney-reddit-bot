@@ -8,4 +8,4 @@ __pycache__/
 db.json
 
 # Ignore the assets
-assets/
+assets/*
